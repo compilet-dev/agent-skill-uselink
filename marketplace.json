@@ -1,0 +1,155 @@
+{
+  "$schema": "https://claude.ai/schemas/skill-pack/v1",
+  "name": "production-agent-skills",
+  "version": "1.0.0",
+  "displayName": "Production Agent Skills",
+  "description": "Production-tested agent skills for backend (Kotlin/Micronaut), frontend (React/Tailwind), design systems, content writing, and startup workflows.",
+  "author": "hieuvo",
+  "homepage": "https://github.com/hieuvo/claude-skills",
+  "repository": "https://github.com/hieuvo/claude-skills",
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "api-endpoint-creator",
+      "displayName": "API Endpoint Creator",
+      "description": "Scaffold a complete RPC-style endpoint: Controller → Manager → Repository → Tests",
+      "path": "skills/api-endpoint-creator/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "backend-api-design",
+      "displayName": "Backend API Design",
+      "description": "Design RPC-style APIs with layered architecture (Controller → Manager → Repository)",
+      "path": "skills/backend-api-design/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "kotlin-best-practices",
+      "displayName": "Kotlin Best Practices",
+      "description": "Kotlin coding standards — null safety, Either error handling, Exposed ORM, coroutines, transactions",
+      "path": "skills/kotlin-best-practices/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "database-patterns",
+      "displayName": "Database Patterns",
+      "description": "Database schema design, migrations, soft deletes, and Exposed ORM patterns",
+      "path": "skills/database-patterns/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "database-table-creator",
+      "displayName": "Database Table Creator",
+      "description": "Create database table with full Kotlin sync (SQL → Table → Entity → Repository → Tests)",
+      "path": "skills/database-table-creator/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "testing-strategies",
+      "displayName": "Testing Strategies",
+      "description": "Testing patterns for Micronaut/Kotlin: repository tests, integration tests, test data builders",
+      "path": "skills/testing-strategies/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "security-checklist",
+      "displayName": "Security Checklist",
+      "description": "Security audit for Micronaut/Kotlin backend — auth, authz, input validation, IDOR, secrets",
+      "path": "skills/security-checklist/SKILL.md",
+      "category": "backend"
+    },
+    {
+      "name": "design-intelligence",
+      "displayName": "Design Intelligence",
+      "description": "Bootstrap a design system: tokens, typography, spacing, Tailwind config, CSS variables",
+      "path": "skills/design-intelligence/SKILL.md",
+      "category": "design"
+    },
+    {
+      "name": "design-workflow",
+      "displayName": "Design Workflow",
+      "description": "Anti-AI-generic design guidelines — make UI that doesn't look AI-generated",
+      "path": "skills/design-workflow/SKILL.md",
+      "category": "design"
+    },
+    {
+      "name": "browser-qa",
+      "displayName": "Browser QA",
+      "description": "Run real browser QA with Playwright — find bugs users would find",
+      "path": "skills/browser-qa/SKILL.md",
+      "category": "design"
+    },
+    {
+      "name": "web-to-prd",
+      "displayName": "Web to PRD",
+      "description": "Scan a live web app, extract features, generate PRD with epics/stories/priorities",
+      "path": "skills/web-to-prd/SKILL.md",
+      "category": "design"
+    },
+    {
+      "name": "article-writing",
+      "displayName": "Article Writing",
+      "description": "Write blog posts, guides, and tutorials that sound human, not AI",
+      "path": "skills/article-writing/SKILL.md",
+      "category": "content"
+    },
+    {
+      "name": "content-engine",
+      "displayName": "Content Engine",
+      "description": "Turn one idea into platform-native content for X, LinkedIn, TikTok, YouTube, newsletters",
+      "path": "skills/content-engine/SKILL.md",
+      "category": "content"
+    },
+    {
+      "name": "investor-outreach",
+      "displayName": "Investor Outreach",
+      "description": "Draft cold emails, warm intro blurbs, and follow-ups for investors",
+      "path": "skills/investor-outreach/SKILL.md",
+      "category": "business"
+    },
+    {
+      "name": "investor-materials",
+      "displayName": "Investor Materials",
+      "description": "Create pitch decks, one-pagers, memos, and financial models",
+      "path": "skills/investor-materials/SKILL.md",
+      "category": "business"
+    }
+  ],
+  "installation": {
+    "npxSkills": {
+      "command": "npx skills add hieuvo/claude-skills",
+      "selectiveCommand": "npx skills add hieuvo/claude-skills --skill <skill-name>",
+      "globalCommand": "npx skills add hieuvo/claude-skills -g",
+      "listCommand": "npx skills add hieuvo/claude-skills --list",
+      "description": "Install via npx skills CLI (auto-detects agent platform)"
+    },
+    "claudeCode": {
+      "command": "claude skills install ./marketplace.json",
+      "manual": {
+        "description": "Clone the repo and copy skills to your project's .claude/skills/ directory",
+        "example": "cp -R skills/* /path/to/your-project/.claude/skills/"
+      }
+    },
+    "cursor": {
+      "command": "cp -R skills/* .cursor/skills/"
+    }
+  },
+  "keywords": [
+    "claude-code",
+    "claude-skill",
+    "kotlin",
+    "micronaut",
+    "exposed-orm",
+    "postgresql",
+    "react",
+    "tailwind",
+    "playwright",
+    "design-system",
+    "api-design",
+    "testing",
+    "security",
+    "content-writing",
+    "investor-relations",
+    "anthropic"
+  ]
+}
