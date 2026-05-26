@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "displayName": "Production Agent Skills",
   "description": "Production-tested agent skills for backend (Kotlin/Micronaut), frontend (React/Tailwind), design systems, content writing, and startup workflows.",
-  "author": "hieuvo",
-  "homepage": "https://github.com/hieuvo/claude-skills",
-  "repository": "https://github.com/hieuvo/claude-skills",
+  "author": "spartan-hieuvo",
+  "homepage": "https://github.com/spartan-hieuvo/claude-skills",
+  "repository": "https://github.com/spartan-hieuvo/claude-skills",
   "license": "MIT",
   "skills": [
     {
@@ -117,10 +117,10 @@
   ],
   "installation": {
     "npxSkills": {
-      "command": "npx skills add hieuvo/claude-skills",
-      "selectiveCommand": "npx skills add hieuvo/claude-skills --skill <skill-name>",
-      "globalCommand": "npx skills add hieuvo/claude-skills -g",
-      "listCommand": "npx skills add hieuvo/claude-skills --list",
+      "command": "npx skills add spartan-hieuvo/claude-skills",
+      "selectiveCommand": "npx skills add spartan-hieuvo/claude-skills --skill <skill-name>",
+      "globalCommand": "npx skills add spartan-hieuvo/claude-skills -g",
+      "listCommand": "npx skills add spartan-hieuvo/claude-skills --list",
       "description": "Install via npx skills CLI (auto-detects agent platform)"
     },
     "claudeCode": {

@@ -18,23 +18,23 @@ Production-tested agent skills for Claude Code, extracted from real Kotlin/Micro
 
 ```bash
 # Install all skills
-npx skills add hieuvo/claude-skills
+npx skills add spartan-hieuvo/claude-skills
 
 # Install a specific skill
-npx skills add hieuvo/claude-skills --skill api-endpoint-creator
+npx skills add spartan-hieuvo/claude-skills --skill api-endpoint-creator
 
 # List available skills
-npx skills add hieuvo/claude-skills --list
+npx skills add spartan-hieuvo/claude-skills --list
 
 # Install globally (available in all projects)
-npx skills add hieuvo/claude-skills -g
+npx skills add spartan-hieuvo/claude-skills -g
 ```
 
 ### Via Claude Code (Manual)
 
 ```bash
 # Clone and register in your project's CLAUDE.md
-git clone https://github.com/hieuvo/claude-skills.git
+git clone https://github.com/spartan-hieuvo/claude-skills.git
 ```
 
 Or install from the marketplace manifest:

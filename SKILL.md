@@ -2,7 +2,7 @@
 type: skill-pack
 name: production-agent-skills
 description: Production-tested agent skills for backend (Kotlin/Micronaut), frontend (React/Tailwind), design systems, content writing, and startup workflows. Extracted from real SaaS codebases — every anti-pattern comes from a real bug or production incident.
-author: hieuvo
+author: spartan-hieuvo
 version: 1.0.0
 includes:
   - skills/api-endpoint-creator/SKILL.md
