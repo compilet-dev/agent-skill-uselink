@@ -1,16 +1,35 @@
-# Production Agent Skills
+# Uselink Skills for Claude Code
 
-Production-tested agent skills for Claude Code, extracted from real Kotlin/Micronaut + React SaaS codebases. Every anti-pattern comes from a real bug, failed PR review, or production incident.
+Agent skills that publish engineering artifacts to [uselink](https://uselink.com) — shareable docs in seconds, no deploy pipeline needed.
+
+Each skill follows the same pattern: **gather data → generate HTML → publish via CLI → return shareable link.**
 
 ## Table of Contents
 
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Available Skills](#available-skills)
 - [Typical Workflows](#typical-workflows)
 - [How Skills Work](#how-skills-work)
-- [Skill Reference](#skill-reference)
 - [Contributing](#contributing)
-- [License](#license)
+
+## Prerequisites
+
+The uselink CLI must be installed and configured:
+
+```bash
+# Install
+npm install -g uselink
+
+# Login (interactive — enter your API key)
+uselink login
+```
+
+Verify:
+```bash
+which uselink        # should resolve
+cat ~/.uselink/config.json  # should have api_key
+```
 
 ## Installation
 
@@ -21,7 +40,7 @@ Production-tested agent skills for Claude Code, extracted from real Kotlin/Micro
 npx skills add spartan-hieuvo/claude-skills
 
 # Install a specific skill
-npx skills add spartan-hieuvo/claude-skills --skill api-endpoint-creator
+npx skills add spartan-hieuvo/claude-skills --skill uselink-repo-summary
 
 # List available skills
 npx skills add spartan-hieuvo/claude-skills --list
@@ -33,8 +52,8 @@ npx skills add spartan-hieuvo/claude-skills -g
 ### Via Claude Code (Manual)
 
 ```bash
-# Clone and register in your project's CLAUDE.md
 git clone https://github.com/spartan-hieuvo/claude-skills.git
+cp -R claude-skills/skills/* /path/to/your-project/.claude/skills/
 ```
 
 Or install from the marketplace manifest:
@@ -43,149 +62,99 @@ Or install from the marketplace manifest:
 claude skills install ./marketplace.json
 ```
 
-Then copy the skills you need:
-
-```bash
-# All skills
-cp -R skills/* /path/to/your-project/.claude/skills/
-
-# Single skill
-cp -R skills/api-endpoint-creator /path/to/your-project/.claude/skills/
-```
-
 ## Available Skills
 
-| Skill | Path | What it does |
-|-------|------|-------------|
-| API Endpoint Creator | `skills/api-endpoint-creator` | Scaffolds a complete RPC-style endpoint: Controller → Manager → Repository → Tests |
-| Backend API Design | `skills/backend-api-design` | Designs RPC-style APIs with layered architecture (Controller → Manager → Repository) |
-| Kotlin Best Practices | `skills/kotlin-best-practices` | Kotlin coding standards — null safety, Either error handling, Exposed ORM, coroutines |
-| Database Patterns | `skills/database-patterns` | Database schema design, migrations, soft deletes, and Exposed ORM patterns |
-| Database Table Creator | `skills/database-table-creator` | Creates database table with full Kotlin sync (SQL → Table → Entity → Repo → Tests) |
-| Testing Strategies | `skills/testing-strategies` | Testing patterns for Micronaut/Kotlin: repository tests, integration tests, test data builders |
-| Security Checklist | `skills/security-checklist` | Security audit: auth, authz, input validation, IDOR, secrets, response sanitization |
-| Design Intelligence | `skills/design-intelligence` | Bootstraps a design system: tokens, typography, spacing, Tailwind config, CSS variables |
-| Design Workflow | `skills/design-workflow` | Anti-AI-generic design guidelines — make UI that doesn't look AI-generated |
-| Browser QA | `skills/browser-qa` | Runs real browser QA with Playwright — finds bugs users would find |
-| Web to PRD | `skills/web-to-prd` | Scans a live web app, extracts features, generates PRD with epics/stories/priorities |
-| Article Writing | `skills/article-writing` | Writes blog posts, guides, and tutorials that sound human, not AI |
-| Content Engine | `skills/content-engine` | Turns one idea into platform-native content for X, LinkedIn, TikTok, YouTube, newsletters |
-| Investor Outreach | `skills/investor-outreach` | Drafts cold emails, warm intro blurbs, and follow-ups for investors |
-| Investor Materials | `skills/investor-materials` | Creates pitch decks, one-pagers, memos, and financial models |
+| Skill | What it does |
+|-------|-------------|
+| [uselink-publish](skills/uselink-publish/) | Publish any Markdown or HTML file to uselink |
+| [uselink-report](skills/uselink-report/) | Generate code review, architecture, or sprint reports and publish |
+| [uselink-share-spec](skills/uselink-share-spec/) | Share planning specs from `.planning/` with stakeholders |
+| [uselink-repo-summary](skills/uselink-repo-summary/) | Scan a GitHub repo and publish an architecture overview |
+| [uselink-pr-digest](skills/uselink-pr-digest/) | Summarize a PR as a stakeholder-friendly page and publish |
+| [uselink-changelog](skills/uselink-changelog/) | Generate release notes from git history and publish |
+| [uselink-api-docs](skills/uselink-api-docs/) | Scan controllers/routes and publish API documentation |
+| [uselink-onboarding](skills/uselink-onboarding/) | Generate a new-developer onboarding guide and publish |
 
 ## Typical Workflows
 
-### 1. Build a new backend feature end-to-end
+### 1. Share a repo with a new team member
 
-1. Use **database-table-creator** to generate the SQL migration, Table, Entity, and Repository
-2. Use **api-endpoint-creator** to scaffold Controller → Manager → Repository with tests
-3. Use **security-checklist** to audit the new endpoint for auth, input validation, and IDOR
-4. Use **testing-strategies** to add integration tests via AbstractControllerTest
+```
+/uselink-repo-summary     → architecture overview link
+/uselink-onboarding       → getting-started guide link
+```
 
-### 2. Design and build a frontend feature
+Send both links — the new hire reads them before touching the code.
 
-1. Use **design-intelligence** to generate design tokens (colors, typography, spacing)
-2. Use **design-workflow** to apply anti-AI-generic guidelines to UI components
-3. Use **browser-qa** to run Playwright QA and catch visual bugs before PR
+### 2. Ship a release and notify stakeholders
 
-### 3. Reverse-engineer a competitor product
+```
+/uselink-changelog        → release notes link
+/uselink-pr-digest #42    → detailed PR summary link
+```
 
-1. Use **web-to-prd** to scan a live web app and extract all features
-2. Use **backend-api-design** to design your API contract for the same feature set
-3. Use **database-patterns** to design the schema
+Share the changelog in Slack. Link the PR digest for anyone who wants details.
 
-### 4. Prepare for fundraising
+### 3. Document the API for a partner
 
-1. Use **investor-materials** to create a pitch deck and one-pager
-2. Use **investor-outreach** to draft personalized cold emails and follow-ups
-3. Use **content-engine** to turn your pitch into launch content across platforms
+```
+/uselink-api-docs         → API reference link
+```
 
-### 5. Write and publish content
+No Swagger setup, no API gateway. Just scan the code and share.
 
-1. Use **article-writing** to draft a blog post or tutorial
-2. Use **content-engine** to adapt it for X, LinkedIn, TikTok, and newsletters
+### 4. Sprint review
+
+```
+/uselink-report           → sprint summary with commits, PRs, contributors
+```
+
+Open the link in the meeting. Everyone sees what shipped.
+
+### 5. Code review for the PM
+
+```
+/uselink-pr-digest #87    → "what changed and why" page
+```
+
+The PM reads plain English, not diffs.
 
 ## How Skills Work
 
-Each skill is a folder containing a `SKILL.md` file with YAML frontmatter and structured instructions. Some skills include supporting files (code templates, examples, checklists).
-
-### Skill structure
+Every skill is a `SKILL.md` file with YAML frontmatter that teaches Claude Code a specific workflow:
 
 ```
-skills/
-  skill-name/
-    SKILL.md              # Main skill definition (frontmatter + instructions)
-    code-patterns.md      # Code templates and examples (optional)
-    examples.md           # Good/bad pattern comparisons (optional)
-    checklists.md         # Review checklists (optional)
+1. Check prerequisites (uselink CLI + config)
+2. Gather data (git, gh, file reads)
+3. Generate HTML (inline CSS, dark mode support)
+4. Write to /tmp/uselink-<type>-<timestamp>.html
+5. Run: uselink publish <file> --title "..." --format html
+6. Return the shareable URL
 ```
 
-### SKILL.md format
+### Invoke a skill
 
-```yaml
----
-name: skill-name
-description: "What it does. Use when [trigger conditions]."
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
----
-
-# Skill Title
-
-## When to Use
-- Trigger condition 1
-- Trigger condition 2
-
-## Rules / Patterns / Anti-Patterns
-...
-
-## Gotchas
-- Common mistake 1
-- Common mistake 2
+```
+/uselink-repo-summary
+/uselink-changelog
+/uselink-pr-digest #42
 ```
 
-The `description` field must contain "Use when" with specific trigger conditions — this tells the agent WHEN to activate the skill.
+Or just describe what you want — Claude matches the right skill:
 
-## Skill Reference
-
-### Backend Skills
-
-| Skill | Key patterns |
-|-------|-------------|
-| api-endpoint-creator | RPC-style `@Post`, no path params, `@QueryValue`, `@Post("/list")` with offset/limit |
-| backend-api-design | Layered architecture, thin controllers, Manager orchestration |
-| kotlin-best-practices | No `!!`, Either error handling, no silent try-catch, no magic numbers |
-| database-patterns | TEXT not VARCHAR, UUID PKs, soft deletes, partial indexes, gen_random_uuid() |
-| database-table-creator | Full Kotlin sync: SQL → Table → Entity → Repository → Tests |
-| testing-strategies | No manager unit tests — controller integration tests via AbstractControllerTest |
-| security-checklist | OWASP top 10 for Micronaut: auth, IDOR, injection, secrets, sanitization |
-
-### Frontend & Design Skills
-
-| Skill | Key patterns |
-|-------|-------------|
-| design-intelligence | Token generation: HSL palettes, type scales, spacing grids, Tailwind config output |
-| design-workflow | Anti-AI-generic: no purple gradients, break the grid, real copy, font weight contrast |
-| browser-qa | Playwright-based: page load → interaction → assertion → screenshot |
-| web-to-prd | Two-pass crawl, feature extraction, epic/story generation, Notion export |
-
-### Content & Business Skills
-
-| Skill | Key patterns |
-|-------|-------------|
-| article-writing | Human voice, no AI filler, strong opening, varied sentence structure |
-| content-engine | Platform-native adaptation: X threads, LinkedIn posts, TikTok scripts, newsletters |
-| investor-outreach | Mom Test principles, cold/warm/follow-up templates, personalization hooks |
-| investor-materials | Consistent narrative across deck/memo/one-pager, realistic projections |
+```
+"Summarize this repo and share it with the PM"
+"Generate release notes for this week"
+"Create API docs and publish them"
+```
 
 ## Contributing
 
-- Each skill is one folder under `skills/` with a `SKILL.md` and optional supporting files
-- Frontmatter must include `name`, `description` (with "Use when" trigger), and `allowed-tools`
-- Include a `## Gotchas` section with at least 3 items — real failure patterns, not generic advice
+- Each skill is one folder under `skills/` with a `SKILL.md`
+- Skills must check prerequisites before publishing
+- HTML must use inline CSS only (uselink strips external stylesheets)
+- All repo-sourced strings must be HTML-escaped
+- Include a `## Gotchas` section with real failure patterns
 
 ## License
 

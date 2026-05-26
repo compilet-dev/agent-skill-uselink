@@ -1,151 +1,105 @@
 ---
 type: skill-pack
-name: production-agent-skills
-description: Production-tested agent skills for backend (Kotlin/Micronaut), frontend (React/Tailwind), design systems, content writing, and startup workflows. Extracted from real SaaS codebases — every anti-pattern comes from a real bug or production incident.
+name: uselink-skills
+description: Agent skills for publishing engineering artifacts to uselink — repo summaries, PR digests, changelogs, API docs, onboarding guides, reports, and specs. Each skill gathers data, generates HTML, and publishes via the uselink CLI.
 author: spartan-hieuvo
 version: 1.0.0
 includes:
-  - skills/api-endpoint-creator/SKILL.md
-  - skills/backend-api-design/SKILL.md
-  - skills/kotlin-best-practices/SKILL.md
-  - skills/database-patterns/SKILL.md
-  - skills/database-table-creator/SKILL.md
-  - skills/testing-strategies/SKILL.md
-  - skills/security-checklist/SKILL.md
-  - skills/design-intelligence/SKILL.md
-  - skills/design-workflow/SKILL.md
-  - skills/browser-qa/SKILL.md
-  - skills/web-to-prd/SKILL.md
-  - skills/article-writing/SKILL.md
-  - skills/content-engine/SKILL.md
-  - skills/investor-outreach/SKILL.md
-  - skills/investor-materials/SKILL.md
+  - skills/uselink-publish/SKILL.md
+  - skills/uselink-report/SKILL.md
+  - skills/uselink-share-spec/SKILL.md
+  - skills/uselink-repo-summary/SKILL.md
+  - skills/uselink-pr-digest/SKILL.md
+  - skills/uselink-changelog/SKILL.md
+  - skills/uselink-api-docs/SKILL.md
+  - skills/uselink-onboarding/SKILL.md
 ---
 
-> **This file is NOT a skill.** It is the entry point for the skill pack. Agents should read the individual skill files listed in `includes` above.
+> **This file is NOT a skill.** It is the entry point for the uselink skill pack. Agents should read the individual skill files listed in `includes` above.
 
 ## Overview
 
-This skill pack contains 15 production-tested skills organized into three categories:
+[uselink](https://uselink.com) lets you publish Markdown and HTML to a shareable link in seconds — perfect for sharing AI-generated engineering artifacts with stakeholders who don't have repo access.
 
-### Backend (Kotlin/Micronaut)
+This skill pack teaches Claude Code to generate and publish various engineering documents to uselink automatically.
 
-Skills for building Kotlin/Micronaut backends with Exposed ORM, PostgreSQL, and Flyway migrations. Enforces layered architecture (Controller → Manager → Repository), RPC-style APIs, and strict coding standards.
+## Required Environment Setup
 
-### Frontend & Design
+Before any skill can publish, the uselink CLI must be installed and configured:
 
-Skills for bootstrapping design systems, applying anti-AI-generic design guidelines, running browser QA with Playwright, and reverse-engineering web apps into PRDs.
+```bash
+# Check prerequisites
+which uselink || echo "Install with: npm install -g uselink"
+test -f ~/.uselink/config.json || echo "Run: uselink login"
+```
 
-### Content & Business
-
-Skills for writing human-sounding content, adapting ideas across social platforms, drafting investor communications, and creating fundraising materials.
+`uselink login` is interactive (prompts for API key) — Claude cannot run it. The user must do this step manually.
 
 ## Skill Modules
 
-| Module | Path | Category |
-|--------|------|----------|
-| API Endpoint Creator | `skills/api-endpoint-creator/SKILL.md` | Backend |
-| Backend API Design | `skills/backend-api-design/SKILL.md` | Backend |
-| Kotlin Best Practices | `skills/kotlin-best-practices/SKILL.md` | Backend |
-| Database Patterns | `skills/database-patterns/SKILL.md` | Backend |
-| Database Table Creator | `skills/database-table-creator/SKILL.md` | Backend |
-| Testing Strategies | `skills/testing-strategies/SKILL.md` | Backend |
-| Security Checklist | `skills/security-checklist/SKILL.md` | Backend |
-| Design Intelligence | `skills/design-intelligence/SKILL.md` | Design |
-| Design Workflow | `skills/design-workflow/SKILL.md` | Design |
-| Browser QA | `skills/browser-qa/SKILL.md` | Design |
-| Web to PRD | `skills/web-to-prd/SKILL.md` | Design |
-| Article Writing | `skills/article-writing/SKILL.md` | Content |
-| Content Engine | `skills/content-engine/SKILL.md` | Content |
-| Investor Outreach | `skills/investor-outreach/SKILL.md` | Business |
-| Investor Materials | `skills/investor-materials/SKILL.md` | Business |
+| Module | What it does |
+|--------|-------------|
+| `uselink-publish` | Publish any Markdown or HTML file to uselink |
+| `uselink-report` | Generate code review, architecture, or sprint reports and publish |
+| `uselink-share-spec` | Share planning specs from `.planning/` with stakeholders |
+| `uselink-repo-summary` | Scan a GitHub repo and publish an architecture overview |
+| `uselink-pr-digest` | Summarize a PR as a stakeholder-friendly page and publish |
+| `uselink-changelog` | Generate release notes from git history and publish |
+| `uselink-api-docs` | Scan controllers/routes and publish API documentation |
+| `uselink-onboarding` | Generate a new-developer onboarding guide and publish |
 
 ## How Agents Should Use This Skill Pack
 
-1. **Read the relevant skill** before starting work. Each skill has a "When to Use" section with trigger conditions.
-2. **Follow the rules and anti-patterns** listed in the skill. They come from real production incidents.
-3. **Check the Gotchas section** at the bottom of each skill — these are the mistakes that Claude actually makes in practice.
-4. **Use supporting files** (code-patterns.md, examples.md, checklists.md) for detailed templates and reference code.
+Every skill follows the same pattern:
+
+1. **Check prerequisites** — `which uselink` + config exists
+2. **Gather data** — git log, file reads, grep, gh CLI
+3. **Generate HTML** — using inline CSS (uselink strips external styles)
+4. **Write to temp file** — `/tmp/uselink-<type>-<timestamp>.html`
+5. **Publish** — `uselink publish <file> --title "..." --format html`
+6. **Return the URL** — the CLI prints it to stdout
 
 ## Typical Agent Workflows
 
-### A. Build a new backend feature
+### A. Share a repo with a new team member
 
-1. Read `database-table-creator` → generate SQL migration + Kotlin Table/Entity/Repository
-2. Read `api-endpoint-creator` → scaffold Controller → Manager → tests
-3. Read `security-checklist` → audit for auth, input validation, IDOR
-4. Read `testing-strategies` → add integration tests
+1. Use **uselink-repo-summary** to generate an architecture overview
+2. Use **uselink-onboarding** to generate a setup guide
+3. Send both links to the new hire
 
-### B. Design and build a UI feature
+### B. Ship a release and notify stakeholders
 
-1. Read `design-intelligence` → generate design tokens
-2. Read `design-workflow` → apply anti-AI-generic guidelines
-3. Read `browser-qa` → run Playwright QA before PR
+1. Use **uselink-changelog** to generate release notes from the tag range
+2. Use **uselink-pr-digest** on the key PRs for detailed context
+3. Share the changelog link in Slack/email
 
-### C. Prepare fundraising materials
+### C. Document the API for a partner
 
-1. Read `investor-materials` → create pitch deck and one-pager
-2. Read `investor-outreach` → draft personalized investor emails
-3. Read `content-engine` → adapt pitch into launch content
+1. Use **uselink-api-docs** to scan controllers and generate API reference
+2. Share the link — no Swagger setup, no API gateway config
+
+### D. Sprint review
+
+1. Use **uselink-report** (sprint type) to generate a summary with commits, PRs, and contributors
+2. Share the link in the sprint review meeting
 
 ## Repository Structure
 
 ```
-production-agent-skills/
-├── README.md                          # Installation and usage guide
-├── SKILL.md                           # This file — skill pack manifest
-├── marketplace.json                   # Machine-readable skill registry
-├── LICENSE                            # MIT license
+uselink-skills/
+├── README.md
+├── SKILL.md                          # This file — skill pack manifest
+├── marketplace.json                  # Machine-readable skill registry
+├── LICENSE
 └── skills/
-    ├── api-endpoint-creator/
+    ├── uselink-publish/SKILL.md      # Basic file publishing
+    ├── uselink-report/               # Reports (code review, architecture, sprint)
     │   ├── SKILL.md
-    │   ├── examples.md
-    │   ├── testing-patterns.md
-    │   └── error-handling-guide.md
-    ├── backend-api-design/
-    │   ├── SKILL.md
-    │   └── code-patterns.md
-    ├── kotlin-best-practices/
-    │   ├── SKILL.md
-    │   └── code-patterns.md
-    ├── database-patterns/
-    │   ├── SKILL.md
-    │   └── code-templates.md
-    ├── database-table-creator/
-    │   ├── SKILL.md
-    │   ├── examples.md
-    │   ├── kotlin-templates.md
-    │   └── validation-checklist.md
-    ├── testing-strategies/
-    │   ├── SKILL.md
-    │   ├── examples.md
-    │   └── integration-test-setup.md
-    ├── security-checklist/
-    │   ├── SKILL.md
-    │   └── audit-reference.md
-    ├── design-intelligence/
-    │   ├── SKILL.md
-    │   ├── palettes.md
-    │   ├── tokens-reference.md
-    │   └── typography.md
-    ├── design-workflow/
-    │   ├── SKILL.md
-    │   └── checklists.md
-    ├── browser-qa/
-    │   ├── SKILL.md
-    │   └── playwright-snippets.md
-    ├── web-to-prd/
-    │   └── SKILL.md
-    ├── article-writing/
-    │   ├── SKILL.md
-    │   └── examples.md
-    ├── content-engine/
-    │   ├── SKILL.md
-    │   └── examples.md
-    ├── investor-outreach/
-    │   ├── SKILL.md
-    │   └── examples.md
-    └── investor-materials/
-        ├── SKILL.md
-        └── example-outline.md
+    │   └── report-templates.md
+    ├── uselink-share-spec/SKILL.md   # Share planning specs
+    ├── uselink-repo-summary/SKILL.md # Repo architecture overview
+    ├── uselink-pr-digest/SKILL.md    # PR summaries for stakeholders
+    ├── uselink-changelog/SKILL.md    # Release notes from git history
+    ├── uselink-api-docs/SKILL.md     # API documentation from code
+    └── uselink-onboarding/SKILL.md   # New-dev getting started guide
 ```

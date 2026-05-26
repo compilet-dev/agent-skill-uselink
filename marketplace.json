@@ -1,118 +1,68 @@
 {
   "$schema": "https://claude.ai/schemas/skill-pack/v1",
-  "name": "production-agent-skills",
+  "name": "uselink-skills",
   "version": "1.0.0",
-  "displayName": "Production Agent Skills",
-  "description": "Production-tested agent skills for backend (Kotlin/Micronaut), frontend (React/Tailwind), design systems, content writing, and startup workflows.",
+  "displayName": "Uselink Skills",
+  "description": "Agent skills for publishing engineering artifacts to uselink — repo summaries, PR digests, changelogs, API docs, onboarding guides, reports, and specs.",
   "author": "spartan-hieuvo",
   "homepage": "https://github.com/spartan-hieuvo/claude-skills",
   "repository": "https://github.com/spartan-hieuvo/claude-skills",
   "license": "MIT",
+  "env": [
+    {
+      "name": "USELINK_CLI",
+      "description": "The uselink CLI must be installed (npm install -g uselink) and configured (uselink login)",
+      "required": true
+    }
+  ],
   "skills": [
     {
-      "name": "api-endpoint-creator",
-      "displayName": "API Endpoint Creator",
-      "description": "Scaffold a complete RPC-style endpoint: Controller → Manager → Repository → Tests",
-      "path": "skills/api-endpoint-creator/SKILL.md",
-      "category": "backend"
+      "name": "uselink-publish",
+      "displayName": "Publish to Uselink",
+      "description": "Publish any Markdown or HTML file to uselink and get a shareable URL",
+      "path": "skills/uselink-publish/SKILL.md"
     },
     {
-      "name": "backend-api-design",
-      "displayName": "Backend API Design",
-      "description": "Design RPC-style APIs with layered architecture (Controller → Manager → Repository)",
-      "path": "skills/backend-api-design/SKILL.md",
-      "category": "backend"
+      "name": "uselink-report",
+      "displayName": "Report Generator",
+      "description": "Generate code review, architecture, or sprint reports as HTML and publish to uselink",
+      "path": "skills/uselink-report/SKILL.md"
     },
     {
-      "name": "kotlin-best-practices",
-      "displayName": "Kotlin Best Practices",
-      "description": "Kotlin coding standards — null safety, Either error handling, Exposed ORM, coroutines, transactions",
-      "path": "skills/kotlin-best-practices/SKILL.md",
-      "category": "backend"
+      "name": "uselink-share-spec",
+      "displayName": "Share Spec",
+      "description": "Publish planning specs from .planning/ to uselink for stakeholder review",
+      "path": "skills/uselink-share-spec/SKILL.md"
     },
     {
-      "name": "database-patterns",
-      "displayName": "Database Patterns",
-      "description": "Database schema design, migrations, soft deletes, and Exposed ORM patterns",
-      "path": "skills/database-patterns/SKILL.md",
-      "category": "backend"
+      "name": "uselink-repo-summary",
+      "displayName": "Repo Summary",
+      "description": "Scan a GitHub repo, generate an architecture overview as HTML, and publish to uselink",
+      "path": "skills/uselink-repo-summary/SKILL.md"
     },
     {
-      "name": "database-table-creator",
-      "displayName": "Database Table Creator",
-      "description": "Create database table with full Kotlin sync (SQL → Table → Entity → Repository → Tests)",
-      "path": "skills/database-table-creator/SKILL.md",
-      "category": "backend"
+      "name": "uselink-pr-digest",
+      "displayName": "PR Digest",
+      "description": "Summarize a pull request as a stakeholder-friendly HTML page and publish to uselink",
+      "path": "skills/uselink-pr-digest/SKILL.md"
     },
     {
-      "name": "testing-strategies",
-      "displayName": "Testing Strategies",
-      "description": "Testing patterns for Micronaut/Kotlin: repository tests, integration tests, test data builders",
-      "path": "skills/testing-strategies/SKILL.md",
-      "category": "backend"
+      "name": "uselink-changelog",
+      "displayName": "Changelog",
+      "description": "Generate release notes from git history and publish to uselink",
+      "path": "skills/uselink-changelog/SKILL.md"
     },
     {
-      "name": "security-checklist",
-      "displayName": "Security Checklist",
-      "description": "Security audit for Micronaut/Kotlin backend — auth, authz, input validation, IDOR, secrets",
-      "path": "skills/security-checklist/SKILL.md",
-      "category": "backend"
+      "name": "uselink-api-docs",
+      "displayName": "API Docs",
+      "description": "Scan backend controllers/routes, generate API documentation as HTML, and publish to uselink",
+      "path": "skills/uselink-api-docs/SKILL.md"
     },
     {
-      "name": "design-intelligence",
-      "displayName": "Design Intelligence",
-      "description": "Bootstrap a design system: tokens, typography, spacing, Tailwind config, CSS variables",
-      "path": "skills/design-intelligence/SKILL.md",
-      "category": "design"
-    },
-    {
-      "name": "design-workflow",
-      "displayName": "Design Workflow",
-      "description": "Anti-AI-generic design guidelines — make UI that doesn't look AI-generated",
-      "path": "skills/design-workflow/SKILL.md",
-      "category": "design"
-    },
-    {
-      "name": "browser-qa",
-      "displayName": "Browser QA",
-      "description": "Run real browser QA with Playwright — find bugs users would find",
-      "path": "skills/browser-qa/SKILL.md",
-      "category": "design"
-    },
-    {
-      "name": "web-to-prd",
-      "displayName": "Web to PRD",
-      "description": "Scan a live web app, extract features, generate PRD with epics/stories/priorities",
-      "path": "skills/web-to-prd/SKILL.md",
-      "category": "design"
-    },
-    {
-      "name": "article-writing",
-      "displayName": "Article Writing",
-      "description": "Write blog posts, guides, and tutorials that sound human, not AI",
-      "path": "skills/article-writing/SKILL.md",
-      "category": "content"
-    },
-    {
-      "name": "content-engine",
-      "displayName": "Content Engine",
-      "description": "Turn one idea into platform-native content for X, LinkedIn, TikTok, YouTube, newsletters",
-      "path": "skills/content-engine/SKILL.md",
-      "category": "content"
-    },
-    {
-      "name": "investor-outreach",
-      "displayName": "Investor Outreach",
-      "description": "Draft cold emails, warm intro blurbs, and follow-ups for investors",
-      "path": "skills/investor-outreach/SKILL.md",
-      "category": "business"
-    },
-    {
-      "name": "investor-materials",
-      "displayName": "Investor Materials",
-      "description": "Create pitch decks, one-pagers, memos, and financial models",
-      "path": "skills/investor-materials/SKILL.md",
-      "category": "business"
+      "name": "uselink-onboarding",
+      "displayName": "Onboarding Guide",
+      "description": "Scan a codebase, generate a new-developer onboarding guide, and publish to uselink",
+      "path": "skills/uselink-onboarding/SKILL.md"
     }
   ],
   "installation": {
@@ -137,19 +87,15 @@
   "keywords": [
     "claude-code",
     "claude-skill",
-    "kotlin",
-    "micronaut",
-    "exposed-orm",
-    "postgresql",
-    "react",
-    "tailwind",
-    "playwright",
-    "design-system",
-    "api-design",
-    "testing",
-    "security",
-    "content-writing",
-    "investor-relations",
-    "anthropic"
+    "anthropic",
+    "uselink",
+    "publishing",
+    "documentation",
+    "reports",
+    "changelog",
+    "api-docs",
+    "onboarding",
+    "engineering-docs",
+    "stakeholder-communication"
   ]
 }
