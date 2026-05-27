@@ -48,23 +48,23 @@ If both commands succeed, you're ready to use the skills.
 
 ```bash
 # Install all skills
-npx skills add spartan-hieuvo/claude-skills
+npx skills add compilet-dev/agent-skill-uselink
 
 # Install a specific skill
-npx skills add spartan-hieuvo/claude-skills --skill uselink-repo-summary
+npx skills add compilet-dev/agent-skill-uselink --skill uselink-repo-summary
 
 # List available skills
-npx skills add spartan-hieuvo/claude-skills --list
+npx skills add compilet-dev/agent-skill-uselink --list
 
 # Install globally (available in all projects)
-npx skills add spartan-hieuvo/claude-skills -g
+npx skills add compilet-dev/agent-skill-uselink -g
 ```
 
 ### Via Claude Code (Manual)
 
 ```bash
-git clone https://github.com/spartan-hieuvo/claude-skills.git
-cp -R claude-skills/skills/* /path/to/your-project/.claude/skills/
+git clone https://github.com/compilet-dev/agent-skill-uselink.git
+cp -R agent-skill-uselink/skills/* /path/to/your-project/.claude/skills/
 ```
 
 Or install from the marketplace manifest:

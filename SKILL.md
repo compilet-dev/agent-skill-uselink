@@ -2,7 +2,7 @@
 type: skill-pack
 name: uselink-skills
 description: Agent skills for publishing engineering artifacts to uselink — repo summaries, PR digests, changelogs, API docs, onboarding guides, reports, and specs. Each skill gathers data, generates HTML, and publishes via the uselink CLI.
-author: spartan-hieuvo
+author: compilet-dev
 version: 1.0.0
 includes:
   - skills/uselink-publish/SKILL.md
@@ -19,7 +19,7 @@ includes:
 
 ## Overview
 
-[uselink](https://uselink.com) lets you publish Markdown and HTML to a shareable link in seconds — perfect for sharing AI-generated engineering artifacts with stakeholders who don't have repo access.
+[uselink](https://uselink.app) lets you publish Markdown and HTML to a shareable link in seconds — perfect for sharing AI-generated engineering artifacts with stakeholders who don't have repo access.
 
 This skill pack teaches Claude Code to generate and publish various engineering documents to uselink automatically.
 
@@ -86,7 +86,7 @@ Every skill follows the same pattern:
 ## Repository Structure
 
 ```
-uselink-skills/
+agent-skill-uselink/
 ├── README.md
 ├── SKILL.md                          # This file — skill pack manifest
 ├── marketplace.json                  # Machine-readable skill registry

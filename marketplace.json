@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "displayName": "Uselink Skills",
   "description": "Agent skills for publishing engineering artifacts to uselink — repo summaries, PR digests, changelogs, API docs, onboarding guides, reports, and specs.",
-  "author": "spartan-hieuvo",
-  "homepage": "https://github.com/spartan-hieuvo/claude-skills",
-  "repository": "https://github.com/spartan-hieuvo/claude-skills",
+  "author": "compilet-dev",
+  "homepage": "https://github.com/compilet-dev/agent-skill-uselink",
+  "repository": "https://github.com/compilet-dev/agent-skill-uselink",
   "license": "MIT",
   "env": [
     {
@@ -67,10 +67,10 @@
   ],
   "installation": {
     "npxSkills": {
-      "command": "npx skills add spartan-hieuvo/claude-skills",
-      "selectiveCommand": "npx skills add spartan-hieuvo/claude-skills --skill <skill-name>",
-      "globalCommand": "npx skills add spartan-hieuvo/claude-skills -g",
-      "listCommand": "npx skills add spartan-hieuvo/claude-skills --list",
+      "command": "npx skills add compilet-dev/agent-skill-uselink",
+      "selectiveCommand": "npx skills add compilet-dev/agent-skill-uselink --skill <skill-name>",
+      "globalCommand": "npx skills add compilet-dev/agent-skill-uselink -g",
+      "listCommand": "npx skills add compilet-dev/agent-skill-uselink --list",
       "description": "Install via npx skills CLI (auto-detects agent platform)"
     },
     "claudeCode": {
